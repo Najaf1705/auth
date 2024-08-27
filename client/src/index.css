@@ -1,0 +1,62 @@
+*,
+::before,
+::after{
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+label{
+  font-size: 20px;
+}
+
+html,body{
+  height: 100%;
+  width: 100%;
+}
+
+body{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container{
+  background-color: antiquewhite;
+  padding: 20px 30px;
+  width: 400px;
+}
+
+.container form{
+  width: 100%;
+  margin: 10px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.container div{
+  width: 100%;
+  margin: 5px 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.container div input{
+  outline: none;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  background: transparent;
+  height: 30px;
+  padding-left: 10px;
+}
+
+.container button{
+  height: 30px;
+  margin: 10px 0;
+  padding: 0 10px;
+  background-color: blanchedalmond;
+  cursor: pointer;
+}
