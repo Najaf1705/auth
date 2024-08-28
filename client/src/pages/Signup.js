@@ -1,6 +1,8 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
-import {ToastContainer} from 'react-toastify'
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import {handleError,handleSuccess, handleWarning} from '../utils';
+// import { toast } from 'react-toastify';
+
 
 function Signup() {
     const [signupInfo,setSignupInfo]=useState({
@@ -10,6 +12,7 @@ function Signup() {
     });
 
     const handleChange=(e)=>{
+        e.preventDefault()
         const {name,value}=e.target;
         console.log(name,value);
         const copySignupInfo={...signupInfo};
@@ -17,11 +20,33 @@ function Signup() {
         setSignupInfo(copySignupInfo);
     }
 
-    const handleSignup=(e)=>{
+    const handleSignup=async (e)=>{
         e.preventDefault();
         const {name,email,password}=signupInfo;
-        if(!name||!email||!password){
-            console.log("Fuck you bastard");
+        if(!name || !email || !password){
+            return handleWarning("All fields are required");
+        }
+        try {
+            const url="http://localhost:8080/auth/signup";
+            const response=await fetch(url,{
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(signupInfo)
+            });
+            const result=await response.json();
+            if(response.status===409){
+                return handleWarning(result.message);
+            }
+            else if(response.status===201){
+                return handleSuccess(result.message);
+            }
+            else{
+                return handleError(result.message);
+            }
+        } catch (error) {
+            return handleError(error);
         }
     }
 
@@ -51,11 +76,11 @@ function Signup() {
                     />
             </div>
             <div>
-                <label htmlFor='pass'>Password</label>
+                <label htmlFor='password'>Password</label>
                 <input
                     onChange={handleChange}
                     type='password'
-                    name='pass'
+                    name='password'
                     placeholder='Enter password'
                     value={signupInfo.password}
                 />
@@ -65,7 +90,6 @@ function Signup() {
                 <Link to='/login'>Already have an account</Link>
             </span>
         </form>
-        <ToastContainer/>
     </div>
   )
 }
