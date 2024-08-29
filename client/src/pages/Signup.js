@@ -1,15 +1,22 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {handleError,handleSuccess, handleWarning} from '../utils';
 // import { toast } from 'react-toastify';
 
 
 function Signup() {
+    const navigate=useNavigate();
     const [signupInfo,setSignupInfo]=useState({
         name:"",
         email:"",
         password:"",
     });
+
+    const gotoLogin=()=>{
+        setTimeout(()=>{
+            navigate('/login');
+        },2000);
+    }
 
     const handleChange=(e)=>{
         e.preventDefault()
@@ -37,22 +44,24 @@ function Signup() {
             });
             const result=await response.json();
             if(response.status===409){
-                return handleWarning(result.message);
+                handleWarning(result.message);
+                gotoLogin();
             }
             else if(response.status===201){
-                return handleSuccess(result.message);
+                handleSuccess(result.message);
+                gotoLogin();
             }
             else{
-                return handleError(result.message);
+                handleError(result.message);
             }
         } catch (error) {
-            return handleError(error);
+            handleError(error);
         }
     }
 
   return (
     <div className='container'>
-        <h1>Login</h1>
+        <h1>Signup</h1>
         <form onSubmit={handleSignup}>
             <div>
                 <label htmlFor='name'>Name</label>

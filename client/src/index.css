@@ -53,7 +53,7 @@ body{
   padding-left: 10px;
 }
 
-.container button{
+.container button, .logoutBtn{
   height: 30px;
   margin: 10px 0;
   padding: 0 10px;

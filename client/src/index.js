@@ -7,11 +7,14 @@ import {BrowserRouter} from 'react-router-dom';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
     <BrowserRouter>
       <App />
     </BrowserRouter>
-  </React.StrictMode>
 );
+
+  // add strict mode for production NAJAF
+  // <React.StrictMode>
+  // </React.StrictMode>
+
 
 reportWebVitals();

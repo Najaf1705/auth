@@ -33,14 +33,14 @@ const login=async(req,res)=>{
         const {email,password}=req.body;
         const user=await userModel.findOne({email});
         if(!user){
-            res.status(403).json({
+            return res.status(403).json({
                 message: "password or email is wrong",
                 success: false,
             })
         }
         const isPassEql=await bcrypt.compare(password,user.password);
         if(!isPassEql){
-            res.status(403).json({
+            return res.status(403).json({
                 message: "password or email is wrong",
                 success: false,
             })
@@ -51,7 +51,7 @@ const login=async(req,res)=>{
             {expiresIn:'24h'}
         )
 
-        res.status(200).json({
+        return res.status(200).json({
             message: `Login successful`,
             success: true,
             jwtToken,
@@ -60,7 +60,7 @@ const login=async(req,res)=>{
         })
 
     } catch (error) {
-        res.status(403).json({
+        return res.status(403).json({
             message: "error in loging in",
             success: false,
             error
