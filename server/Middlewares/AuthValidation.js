@@ -6,9 +6,9 @@ const signupValidation=(req,res,next)=>{
         email:joi.string().email().required(),
         password:joi.string().min(3).max(20).required(),
     });
-    const {err}=schema.validate(req.body);
-    if(err){
-        return res.status(400).json({message:'bad reqwt',err});
+    const {error}=schema.validate(req.body);
+    if(error){
+        return res.status(400).json({message:'bad reqwt',error: error.details});
     }
     next();
 }
@@ -18,9 +18,9 @@ const loginValidation=(req,res,next)=>{
         email:joi.string().email().required(),
         password:joi.string().min(3).max(20).required(),
     });
-    const {err}=schema.validate(req.body);
-    if(err){
-        return res.status(400).json({message:'bad reqwt',err});
+    const {error}=schema.validate(req.body);
+    if(error){
+        return res.status(400).json({message:'bad reqwt',error: error.details});
     }
     next();
 }
