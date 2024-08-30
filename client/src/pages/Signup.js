@@ -21,7 +21,7 @@ function Signup() {
     const handleChange=(e)=>{
         e.preventDefault()
         const {name,value}=e.target;
-        console.log(name,value);
+        // console.log(name,value);
         const copySignupInfo={...signupInfo};
         copySignupInfo[name]=value;
         setSignupInfo(copySignupInfo);
@@ -46,6 +46,9 @@ function Signup() {
             if(response.status===409){
                 handleWarning(result.message);
                 gotoLogin();
+            }
+            else if(response.status===400){
+                handleWarning(result.error[0].message);
             }
             else if(response.status===201){
                 handleSuccess(result.message);

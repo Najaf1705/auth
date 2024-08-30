@@ -21,7 +21,7 @@ function Login() {
     const handleChange=(e)=>{
         e.preventDefault()
         const {name,value}=e.target;
-        console.log(name,value);
+        // console.log(name,value);
         const copyLoginInfo={...loginInfo};
         copyLoginInfo[name]=value;
         setLoginInfo(copyLoginInfo);
@@ -47,9 +47,12 @@ function Login() {
             if(response.status===403){
                 handleError(result.message);
             }
+            else if(response.status===400){
+                handleWarning(result.error[0].message);
+            }
             else if(response.status===200){
                 handleSuccess(result.message);
-                console.log(jwtToken);
+                // console.log(jwtToken);
                 localStorage.setItem('token',jwtToken);
                 localStorage.setItem('loggedinUserName',name);
                 gotoHome();
