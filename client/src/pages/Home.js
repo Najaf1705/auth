@@ -18,7 +18,7 @@ function Home() {
   
   const getProducts=async()=>{
     try {
-      const url="http://localhost:8080/products";
+      const url="https://auth-api-steel.vercel.app/products";
       const response=await fetch(url,{
         headers: {
           'Authorization': localStorage.getItem('token')
