@@ -7,7 +7,6 @@ import {handleError,handleSuccess, handleWarning} from '../utils';
 function Login() {
     const navigate=useNavigate();
     const [loginInfo,setLoginInfo]=useState({
-        name:"",
         email:"",
         password:"",
     });
@@ -34,7 +33,7 @@ function Login() {
             return handleWarning("All fields are required");
         }
         try {
-            const url="https://auth-api-steel.vercel.app/auth/Login";
+            const url="https://auth-api-steel.vercel.app/auth/login";
             const response=await fetch(url,{
                 method: "POST",
                 headers: {
