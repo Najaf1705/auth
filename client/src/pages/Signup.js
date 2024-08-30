@@ -34,7 +34,7 @@ function Signup() {
             return handleWarning("All fields are required");
         }
         try {
-            const url="http://localhost:8080/auth/signup";
+            const url="https://auth-api-steel.vercel.app/auth/signup";
             const response=await fetch(url,{
                 method: "POST",
                 headers: {
